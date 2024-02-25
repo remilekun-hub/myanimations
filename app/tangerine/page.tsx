@@ -17,8 +17,7 @@ export default function Tangerine() {
 	});
 
 	useMotionValueEvent(scrollYProgress, "change", (latest) => {
-		const prev = scrollY.getPrevious();
-		console.log({ latest, prev });
+		console.log({ latest });
 	});
 
 	type ProductType = {
@@ -31,15 +30,15 @@ export default function Tangerine() {
 
 	const InsuranceWrapper = ({ p }: { p: ProductType }) => {
 		const [show, setShow] = useState(true);
-		useMotionValueEvent(scrollY, "change", (latest) => {
-			console.log(latest);
-			if (latest && latest > 300) {
+		useMotionValueEvent(scrollYProgress, "change", (latest) => {
+			const val = latest * 100;
+			if (val && val > 25) {
 				setShow(false);
 			}
-			if (latest === 0) {
+			if (val === 0) {
 				setShow(true);
 			}
-			if (latest && latest < 300) {
+			if (val && val < 25) {
 				setShow(true);
 			}
 		});
@@ -78,8 +77,9 @@ export default function Tangerine() {
 
 	const TravelWrapper = ({ p }: { p: ProductType }) => {
 		const [show, setShow] = useState(false);
-		useMotionValueEvent(scrollY, "change", (latest) => {
-			if (latest > 300 && latest < 600) {
+		useMotionValueEvent(scrollYProgress, "change", (latest) => {
+			const val = latest * 100;
+			if (val > 25 && val < 50) {
 				setShow(true);
 			} else {
 				setShow(false);
@@ -121,8 +121,9 @@ export default function Tangerine() {
 
 	const PensionWrapper = ({ p }: { p: ProductType }) => {
 		const [show, setShow] = useState(false);
-		useMotionValueEvent(scrollY, "change", (latest) => {
-			if (latest > 600 && latest < 900) {
+		useMotionValueEvent(scrollYProgress, "change", (latest) => {
+			const val = latest * 100;
+			if (val > 50 && val < 75) {
 				setShow(true);
 			} else {
 				setShow(false);
@@ -164,8 +165,9 @@ export default function Tangerine() {
 	};
 	const AccessWrapper = ({ p }: { p: ProductType }) => {
 		const [show, setShow] = useState(false);
-		useMotionValueEvent(scrollY, "change", (latest) => {
-			if (latest > 900) {
+		useMotionValueEvent(scrollYProgress, "change", (latest) => {
+			const val = latest * 100;
+			if (val > 75) {
 				setShow(true);
 			} else {
 				setShow(false);
@@ -232,7 +234,7 @@ export default function Tangerine() {
 	];
 
 	return (
-		<>
+		<div className="relative">
 			<div
 				className="min-h-[3000px] relative"
 				ref={scrollContainer}
@@ -244,7 +246,7 @@ export default function Tangerine() {
 					))}
 				</div>
 
-				<div className="fixed w-[2px] top-1/2 left-[calc(50vw-620px)] h-[65%] rounded-full -translate-y-1/2 flex flex-col gap-3 justify-evenly bg-gray-300">
+				<div className="fixed w-[2px] top-1/2 left-[calc(50vw-620px)] h-[650px] rounded-full -translate-y-1/2 flex flex-col gap-3 justify-evenly bg-gray-300">
 					<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
 					<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
 					<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
@@ -254,7 +256,7 @@ export default function Tangerine() {
 					/>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 
 	function Wrapper({
