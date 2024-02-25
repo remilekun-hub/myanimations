@@ -16,7 +16,7 @@ export default function Tangerine() {
 		offset: ["start start", "end end"],
 	});
 
-	useMotionValueEvent(scrollY, "change", (latest) => {
+	useMotionValueEvent(scrollYProgress, "change", (latest) => {
 		const prev = scrollY.getPrevious();
 		console.log({ latest, prev });
 	});
@@ -79,12 +79,10 @@ export default function Tangerine() {
 	const TravelWrapper = ({ p }: { p: ProductType }) => {
 		const [show, setShow] = useState(false);
 		useMotionValueEvent(scrollY, "change", (latest) => {
-			console.log(latest);
-			if (latest && latest < 300) {
-				setShow(false);
-			}
-			if (latest && latest > 300) {
+			if (latest > 300 && latest < 600) {
 				setShow(true);
+			} else {
+				setShow(false);
 			}
 		});
 
@@ -121,6 +119,93 @@ export default function Tangerine() {
 		);
 	};
 
+	const PensionWrapper = ({ p }: { p: ProductType }) => {
+		const [show, setShow] = useState(false);
+		useMotionValueEvent(scrollY, "change", (latest) => {
+			if (latest > 600 && latest < 900) {
+				setShow(true);
+			} else {
+				setShow(false);
+			}
+		});
+
+		return (
+			<Wrapper
+				p={p}
+				className={twMerge(
+					show
+						? "opacity-100 translate-y-0 delay-[300ms] duration-300 ease-in"
+						: "opacity-0 translate-y-[50px] duration-[300ms] ease-out"
+				)}
+			>
+				<div
+					className={`flex  flex-col md:flex-row min-h-screen justify-center md:items-center md:justify-between px-6 lg:px-14 gap-x-10 relative max-w-[1200px] mx-auto`}
+				>
+					<div className="w-full flex flex-col gap-7">
+						<p className="tracking-[5px] text-[12px] font-[400] text-gray-600">
+							PENSIONS
+						</p>
+						<h1 className="w-full lg:max-w-[350px] text-[40px] font-[600]">
+							Be free to enjoy life in retirement
+						</h1>
+						<p className="w-full lg:max-w-[480px] leading-[36px] text-[17px] ">
+							A retirement savings account is a step in the right
+							direction in securing your future. With this pensions
+							account, you insure your savings and earn returns on your
+							investment in preparation for life after employment.
+						</p>
+					</div>
+					<div className="w-full">
+						<Image src={pension} alt="thumbnail" className="w-full" />
+					</div>
+				</div>
+			</Wrapper>
+		);
+	};
+	const AccessWrapper = ({ p }: { p: ProductType }) => {
+		const [show, setShow] = useState(false);
+		useMotionValueEvent(scrollY, "change", (latest) => {
+			if (latest > 900) {
+				setShow(true);
+			} else {
+				setShow(false);
+			}
+		});
+
+		return (
+			<Wrapper
+				p={p}
+				className={twMerge(
+					show
+						? "opacity-100 translate-y-0 delay-[300ms] duration-300 ease-in"
+						: "opacity-0 translate-y-[50px] duration-[300ms] ease-out"
+				)}
+			>
+				<div
+					className={`flex  flex-col md:flex-row min-h-screen justify-center md:items-center md:justify-between px-6 lg:px-14 gap-x-10 relative max-w-[1200px] mx-auto`}
+				>
+					<div className="w-full flex flex-col gap-7">
+						<p className="tracking-[5px] text-[12px] font-[400] text-gray-600">
+							HEALTH INSURANCE
+						</p>
+						<h1 className="w-full lg:max-w-[380px] text-[45px] font-[600]">
+							Access quality health care
+						</h1>
+						<p className="w-full lg:max-w-[480px] leading-[36px] text-[17px] ">
+							Get connected to qualified healthcare practitioners and
+							hospitals near you. Protect you and your loved ones’ health
+							by getting a plan that offers quality medical services
+							whenever you need to and even in an emergency.
+						</p>
+					</div>
+					<div className="w-full">
+						<Image src={health} alt="thumbnail" className="w-full" />
+					</div>
+				</div>
+			</Wrapper>
+		);
+	};
+
 	const products: ProductType[] = [
 		{
 			id: "1",
@@ -132,52 +217,18 @@ export default function Tangerine() {
 			background: `bg-gradient-to-t from-[#e7e7e7] to-[hsla(0,0%,100%,0)]  from-[0%]  to-[20%] to-[50%] transition`,
 			wrapper: TravelWrapper,
 		},
-		// {
-		// 	id: "3",
-		// 	content: (
-		// 		<div className="flex min-h-screen items-center justify-between px-14 gap-x-10">
-		// 			<div className="w-full flex flex-col gap-7">
-		// 				<h1 className="w-full lg:max-w-[380px] text-[45px] font-[600]">
-		// 					Be free to enjoy life in retirement
-		// 				</h1>
-		// 				<p className="w-full lg:max-w-[480px] leading-[36px] text-[17px] ">
-		// 					A retirement savings account is a step in the right
-		// 					direction in securing your future. With this pensions
-		// 					account, you insure your savings and earn returns on your
-		// 					investment in preparation for life after employment.
-		// 				</p>
-		// 			</div>
-		// 			<div className="w-full">
-		// 				<Image src={pension} alt="thumbnail" className="w-full" />
-		// 			</div>
-		// 		</div>
-		// 	),
-		// 	background:
-		// 		"bg-gradient-to-t from-[#fff3e3] to-[hsla(0,0%,100%,0)] from-[0%] to-[20%] to-[50%] transition",
-		// },
-		// {
-		// 	id: "4",
-		// 	content: (
-		// 		<div className="flex min-h-screen items-center justify-between px-14 gap-x-10">
-		// 			<div className="w-full flex flex-col gap-7">
-		// 				<h1 className="w-full lg:max-w-[380px] text-[45px] font-[600]">
-		// 					Access quality health care
-		// 				</h1>
-		// 				<p className="w-full lg:max-w-[480px] leading-[36px] text-[17px] ">
-		// 					Get connected to qualified healthcare practitioners and
-		// 					hospitals near you. Protect you and your loved ones’ health
-		// 					by getting a plan that offers quality medical services
-		// 					whenever you need to and even in an emergency.
-		// 				</p>
-		// 			</div>
-		// 			<div className="w-full">
-		// 				<Image src={health} alt="thumbnail" className="w-full" />
-		// 			</div>
-		// 		</div>
-		// 	),
-		// 	background:
-		// 		"bg-gradient-to-t from-[#f7ffe9] to-[hsla(0,0%,100%,0)] from-[0%] to-[20%] to-[50%] transition",
-		// },
+		{
+			id: "3",
+			wrapper: PensionWrapper,
+			background:
+				"bg-gradient-to-t from-[#fff3e3] to-[hsla(0,0%,100%,0)] from-[0%] to-[20%] to-[50%] transition",
+		},
+		{
+			id: "4",
+			wrapper: AccessWrapper,
+			background:
+				"bg-gradient-to-t from-[#f7ffe9] to-[hsla(0,0%,100%,0)] from-[0%] to-[20%] to-[50%] transition",
+		},
 	];
 
 	return (
