@@ -79,8 +79,8 @@ export default function Home() {
 	];
 
 	return (
-		<div className="h-screen py-14">
-			<div className="grid grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto gap-5 w-full h-full md:h-[800px] p-6">
+		<div className="min-h-screen relative">
+			<div className="grid grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto gap-5 w-full min-h-screen md:h-[800px] p-6 py-14">
 				{cards.map((card) => (
 					<div
 						key={card.id}
@@ -147,7 +147,7 @@ export default function Home() {
 				))}
 				<motion.div
 					className={twMerge(
-						"absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10",
+						"absolute h-full w-full inset-0 bg-black opacity-0 z-10",
 						selected?.id ? "pointer-events-auto" : "pointer-events-none"
 					)}
 					animate={{ opacity: selected?.id ? 0.35 : 0 }}
