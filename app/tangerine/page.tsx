@@ -7,11 +7,12 @@ import travel from "../../src/assets/travel_model_9d77c15e4c.png";
 import pension from "../../src/assets/pensions_model_fbe294901d.png";
 import health from "../../src/assets/health_model_98c7dd5e71.png";
 import { useScroll, motion, useMotionValueEvent } from "framer-motion";
+import { RootScroll } from "@/src/component/rootscroll";
 
 export default function Tangerine() {
 	const scrollContainer = useRef<HTMLDivElement>(null);
 
-	const { scrollYProgress, scrollY } = useScroll({
+	const { scrollYProgress } = useScroll({
 		target: scrollContainer,
 		offset: ["start start", "end end"],
 	});
@@ -235,27 +236,29 @@ export default function Tangerine() {
 
 	return (
 		<div className="relative">
-			<div
-				className="min-h-[3000px] relative"
-				ref={scrollContainer}
-				id="wrapper"
-			>
-				<div className="sticky top-0 snap-y">
-					{products.map((p) => (
-						<p.wrapper key={p.id} p={p} />
-					))}
-				</div>
+			<RootScroll>
+				<div
+					className="min-h-[4000px] relative"
+					ref={scrollContainer}
+					id="wrapper"
+				>
+					<div className="sticky top-0 snap-y">
+						{products.map((p) => (
+							<p.wrapper key={p.id} p={p} />
+						))}
+					</div>
 
-				<div className="fixed w-[2px] top-1/2 left-[calc(50vw-620px)] h-[650px] rounded-full -translate-y-1/2 flex flex-col gap-3 justify-evenly bg-gray-300">
-					<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
-					<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
-					<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
-					<motion.span
-						className="absolute bg-[#ff9100] w-full top-0 origin-top h-full"
-						style={{ scaleY: scrollYProgress }}
-					/>
+					<div className="fixed w-[2px] top-1/2 left-[calc(50vw-620px)] h-[650px] rounded-full -translate-y-1/2 flex flex-col gap-3 justify-evenly bg-gray-300">
+						<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
+						<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
+						<div className="bg-white h-[11px] w-full rounded-full z-[3]"></div>
+						<motion.span
+							className="absolute bg-[#ff9100] w-full top-0 origin-top h-full"
+							style={{ scaleY: scrollYProgress }}
+						/>
+					</div>
 				</div>
-			</div>
+			</RootScroll>
 		</div>
 	);
 
